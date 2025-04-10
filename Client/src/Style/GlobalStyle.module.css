@@ -2,5 +2,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1pc 4pc;
+  padding: 1pc 15pc;
+}
+
+.content {
+  margin-top: 7pc;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: flex-start;
+  align-items: start;
+  padding: 1pc 15pc;
 }
