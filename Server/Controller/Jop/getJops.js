@@ -22,3 +22,28 @@ export const getJop = async (req, res) => {
     });
   }
 };
+
+export const getJopById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!id) {
+      res.status(404).json({
+        statusbar: "error",
+        message: "Plaese enter id",
+      });
+    }
+
+    const Jops = await JopModel.findById(id);
+
+    return res.status(200).json({
+      statusbar: "success",
+      Jops,
+    });
+  } catch (error) {
+    res.status(500).json({
+      statusbar: "error",
+      message: error,
+    });
+  }
+};
