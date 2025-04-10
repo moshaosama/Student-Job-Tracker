@@ -41,11 +41,9 @@ const Jopinfo = ({ jops }: jopDataArray | jopData) => {
             return (
               <Link
                 to={`${pathname == "/" ? `/jops/${jop._id}` : `${jop._id}`}`}
+                key={i}
               >
-                <div
-                  key={i}
-                  className="border-[1px] cursor-pointer hover:bg-gray-100 border-gray-200 border-solid flex shadow-lg flex-col gap-1  rounded-lg px-5 py-2 w-96"
-                >
+                <div className="border-[1px] cursor-pointer hover:bg-gray-100 border-gray-200 border-solid flex shadow-lg flex-col gap-1  rounded-lg px-5 py-2 w-96">
                   <h1 className="font-bold">{jop?.company}</h1>
                   <p className="text-[#969696]">{jop?.location}</p>
                   <h1 className="font-bold">{jop?.role}</h1>
