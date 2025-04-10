@@ -3,7 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { connectDB } from "./ConnectDB/DB.js";
 import createJopRouter from "./Router/Jop/createJop.js";
-import getJopRouter from "./Router/Jop/getJop.js";
+import { getJopByIdRouter, getJopRouter } from "./Router/Jop/getJop.js";
 const app = express();
 const Port = process.env.PORT || 3000;
 
@@ -15,6 +15,7 @@ dotenv.config({ path: ".env" });
 // EndPoints
 app.use("/createjop", createJopRouter);
 app.use("/getjops", getJopRouter);
+app.use("/jop", getJopByIdRouter);
 
 ////////////
 
