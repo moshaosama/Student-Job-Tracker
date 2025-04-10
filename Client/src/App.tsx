@@ -1,12 +1,9 @@
-import Header from "./Components/Header";
-import WithTheme from "./Utils/WithTheme";
-
-const ThemedHeader = WithTheme(Header);
+import RouterPages from "./Routes/RouterPages";
 
 function App() {
   return (
     <>
-      <ThemedHeader />
+      <RouterPages />
     </>
   );
 }
