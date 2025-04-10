@@ -1,7 +1,12 @@
+import Header from "./Components/Header";
+import WithTheme from "./Utils/WithTheme";
+
+const ThemedHeader = WithTheme(Header);
+
 function App() {
   return (
     <>
-      <h1>sada</h1>
+      <ThemedHeader />
     </>
   );
 }
