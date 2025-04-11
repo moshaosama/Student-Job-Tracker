@@ -24,7 +24,7 @@ const Home = () => {
           <form action="" className="flex items-center">
             <input
               type="text"
-              className="p-2 w-[40pc] rounded-l-full shadow-xl border-[1px] border-gray-300 border-solid"
+              className="p-2 w-[40pc] max-sm:w-[18pc] rounded-l-full shadow-xl border-[1px] border-gray-300 border-solid"
               placeholder="Find Your Jop"
             />
             <button className="bg-purple-400 p-[9px] text-white text-2xl w-14 flex justify-center rounded-r-full cursor-pointer hover:bg-gray-600 transition-all duration-300">
