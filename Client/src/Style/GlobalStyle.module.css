@@ -14,3 +14,11 @@
   align-items: start;
   padding: 1pc 15pc;
 }
+@media (max-width: 800px) {
+  .container {
+    padding: 1pc;
+  }
+  .content {
+    padding: 1pc;
+  }
+}
