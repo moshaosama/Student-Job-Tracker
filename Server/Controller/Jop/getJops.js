@@ -4,21 +4,21 @@ export const getJop = async (req, res) => {
   try {
     const Jops = await JopModel.find();
 
-    if (!Jops) {
-      res.status(404).json({
+    if (Jops.length === 0) {
+      return res.status(404).json({
         statusbar: "error",
-        message: "you don't have any jop",
+        message: "You don't have any jobs.",
       });
     }
 
-    res.status(200).json({
+    return res.status(200).json({
       statusbar: "success",
       Jops,
     });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       statusbar: "error",
-      message: error,
+      message: error.message || "An error occurred while fetching jobs.",
     });
   }
 };
@@ -28,22 +28,36 @@ export const getJopById = async (req, res) => {
     const { id } = req.params;
 
     if (!id) {
-      res.status(404).json({
+      return res.status(400).json({
         statusbar: "error",
-        message: "Plaese enter id",
+        message: "Please enter a job id",
       });
     }
 
-    const Jops = await JopModel.findById(id);
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        statusbar: "error",
+        message: "Invalid job id",
+      });
+    }
+
+    const Jop = await JopModel.findById(id);
+
+    if (!Jop) {
+      return res.status(404).json({
+        statusbar: "error",
+        message: "Job not found",
+      });
+    }
 
     return res.status(200).json({
       statusbar: "success",
-      Jops,
+      Jop,
     });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       statusbar: "error",
-      message: error,
+      message: error.message || "An error occurred while fetching the job",
     });
   }
 };
