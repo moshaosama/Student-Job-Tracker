@@ -94,12 +94,20 @@ const Jopinfo = ({ jops }: jopDataArray | jopData) => {
           <div className="mt-10 w-full">
             <div className="flex justify-between">
               <p className="font-semibold">Jop Description</p>
-              <button
-                className="bg-orange-400 w-20 py-1 rounded-lg font-semibold cursor-pointer hover:bg-amber-200 transition-all duration-300"
-                onClick={handleClickEditState}
-              >
-                Edit
-              </button>
+              <div className="flex items-center gap-5">
+                <button
+                  className="bg-orange-400 w-20 py-1 rounded-lg font-semibold cursor-pointer hover:bg-amber-200 transition-all duration-300"
+                  onClick={handleClickEditState}
+                >
+                  Edit
+                </button>
+                <button
+                  className="bg-red-400 w-20 py-1 rounded-lg font-semibold cursor-pointer hover:bg-red-200 transition-all duration-300"
+                  onClick={handleClickEditState}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
             <hr className="bg-[#ddd] border-none h-1 mt-1" />
             <div className="mt-3">
