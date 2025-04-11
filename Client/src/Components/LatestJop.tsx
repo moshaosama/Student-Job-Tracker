@@ -1,19 +1,15 @@
-import { useState } from "react";
 import useLoading from "../Hooks/useLoading";
 import { content } from "../Style";
 import WithLoader from "../Utils/WithLoader";
 import AddJopForm from "./AddJopForm";
 import Jopinfo from "./Jopinfo";
 import GetJopsLoader from "./Shared/Jops/GetJopsLoader";
+import useAddForm from "../Hooks/useAddForm";
 
 const LatestJop = () => {
   const LoadedJopInfo = WithLoader(Jopinfo);
   const { loading } = useLoading();
-  const [AddFromState, setAddFormState] = useState(false);
-
-  const handleClick = () => {
-    setAddFormState(!AddFromState);
-  };
+  const { AddFromState, handleClick } = useAddForm();
   return (
     <>
       <div className={`${content}`}>
