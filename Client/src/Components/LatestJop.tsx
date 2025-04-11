@@ -13,8 +13,8 @@ const LatestJop = () => {
   return (
     <>
       <div className={`${content}`}>
-        <div className="flex justify-between w-full">
-          <h1 className="text-3xl font-bold">
+        <div className="flex justify-between w-full max-sm:w-80">
+          <h1 className="text-3xl max-sm:text-xl font-bold">
             <span className="text-purple-400">Latest and Top</span> Job Logs
           </h1>
           <button
