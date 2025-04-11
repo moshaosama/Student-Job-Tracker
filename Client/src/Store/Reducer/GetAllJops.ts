@@ -1,32 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-
-interface Job {
-  _id: string;
-  company: string;
-  location: string;
-  role: string;
-  status: string;
-  date: string;
-  link: string;
-}
-
-interface DataType {
-  statusbar: string;
-  Jops: Job[];
-}
-
-interface initialStateData {
-  data: DataType | null;
-  error: string;
-  loading: boolean;
-}
-
-const initialState: initialStateData = {
-  data: null,
-  error: "",
-  loading: false,
-};
+import { initialState } from "../Types/PublicTypes";
 
 export const fetchAllJops = createAsyncThunk(
   "allJops/fetchAllJops",

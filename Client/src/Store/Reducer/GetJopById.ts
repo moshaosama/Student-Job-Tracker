@@ -29,7 +29,7 @@ const initialState: initialStateData = {
 };
 
 export const fetchAllJopByid = createAsyncThunk(
-  "allJops/fetchAllJops",
+  "JopByid/fetchAllJopByid",
   async (id: string, thunkAPI) => {
     try {
       const response = await axios.get(`http://localhost:3000/jop/${id}`);
@@ -41,7 +41,7 @@ export const fetchAllJopByid = createAsyncThunk(
 );
 
 const GetALlJopByidSlice = createSlice({
-  name: "allJops",
+  name: "JopByid",
   initialState,
   reducers: {},
   extraReducers: (builder) => {

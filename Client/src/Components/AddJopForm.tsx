@@ -1,6 +1,9 @@
 import { useForm } from "react-hook-form";
-import useNotify from "../Hooks/useNotify";
 import { ToastContainer } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../Store/Store";
+import { fetchCreateNewJop } from "../Store/Reducer/CreateNewJop";
+import { fetchAllJops } from "../Store/Reducer/GetAllJops";
 
 const AddJopForm = ({ setAddForm }: { setAddForm: () => void }) => {
   const {
@@ -8,29 +11,22 @@ const AddJopForm = ({ setAddForm }: { setAddForm: () => void }) => {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm();
+
   const date = new Date();
   const formattedDate = `${date.getDate()}/${
     date.getMonth() + 1
   }/${date.getFullYear()}`;
-  const { notifySuccess, notifyError } = useNotify();
 
-  const handleSubmitData = (data: any) => {
-    fetch("http://localhost:3000/createjop", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ ...data, date: formattedDate }),
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then(() => {
-        notifySuccess("Addedd Successfully!❤️");
-      })
-      .catch((err) => {
-        notifyError(err as string);
-      });
+  const dispatch = useDispatch<AppDispatch>();
+
+  const handleSubmitData = async (data: any) => {
+    try {
+      await dispatch(fetchCreateNewJop({ ...data, date: formattedDate }));
+      await dispatch(fetchAllJops());
+      setAddForm();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
