@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from "react-router";
+import { Link, useNavigate } from "react-router";
 import useAddForm from "../Hooks/useAddForm";
 import EditJopForm from "./EditJopForm";
 import { useDispatch } from "react-redux";
@@ -61,7 +61,7 @@ const Jopinfo = ({ jops }: jopDataArray | jopData) => {
   return (
     <>
       {Array.isArray(jops?.data?.Jops) ? (
-        <div className="grid grid-cols-3 w-full gap-y-5">
+        <div className="grid grid-cols-3 max-sm:grid-cols-1 w-full gap-y-5">
           {jops?.data?.Jops?.length > 0 ? (
             <>
               {jops?.data?.Jops?.map((jop, i) => {
@@ -72,7 +72,7 @@ const Jopinfo = ({ jops }: jopDataArray | jopData) => {
                     }`}
                     key={i}
                   >
-                    <div className="border-[1px] cursor-pointer hover:bg-gray-100 border-gray-200 border-solid flex shadow-lg flex-col gap-1  rounded-lg px-5 py-2 w-96">
+                    <div className="border-[1px] cursor-pointer hover:bg-gray-100 border-gray-200 border-solid flex shadow-lg flex-col gap-1  rounded-lg px-5 py-2 w-96 max-sm:w-80">
                       <h1 className="font-bold">{jop?.company}</h1>
                       <p className="text-[#969696]">{jop?.location}</p>
                       <h1 className="font-bold">{jop?.role}</h1>
