@@ -27,7 +27,7 @@ const AddJopForm = ({ setAddForm }: { setAddForm: () => void }) => {
   };
 
   return (
-    <div className={`bg-white w-[50pc] p-3  rounded-xl`}>
+    <div className={`bg-white w-[50pc] max-sm:w-[21pc] p-3  rounded-xl`}>
       <h1 className="text-lg text-black font-bold">Add New Jop</h1>
 
       <form
@@ -109,13 +109,13 @@ const AddJopForm = ({ setAddForm }: { setAddForm: () => void }) => {
 
         <div className="flex items-center justify-between">
           <button
-            className="bg-blue-400 w-40 py-1 rounded-lg font-semibold cursor-pointer"
+            className="bg-blue-400 w-40 max-sm:w-20 py-1 rounded-lg font-semibold cursor-pointer"
             disabled={isSubmitting}
           >
             Add
           </button>
           <button
-            className="bg-red-400 w-40 py-1 rounded-lg font-semibold cursor-pointer"
+            className="bg-red-400 w-40 max-sm:w-20 py-1 rounded-lg font-semibold cursor-pointer"
             onClick={setAddForm}
           >
             Cancel
