@@ -16,7 +16,7 @@ const Jops = () => {
   return (
     <>
       <div
-        className={`${container} gap-4`}
+        className={`${container} gap-4 max-sm:flex-col`}
         style={{ justifyContent: "start", alignItems: "start" }}
       >
         <FilterJops handleChange={handleChange} SelectInput={SelectInput} />
