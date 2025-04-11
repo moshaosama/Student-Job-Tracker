@@ -39,8 +39,6 @@ interface jopData {
 const Jopinfo = ({ jops }: jopDataArray | jopData) => {
   const { pathname } = window.location;
 
-  console.log(jops);
-
   const { handleClickEditState, EditFromState } = useAddForm();
   return (
     <>
