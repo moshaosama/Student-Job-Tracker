@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import JopModel from "../../Models/JopModel.js";
 
 export const getJop = async (req, res) => {
