@@ -1,47 +1,61 @@
-import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-
-interface jopData {
-  statusbar: string;
-  Jops: {
-    _id: string;
-    company: string;
-    location: string;
-    role: string;
-    status: string;
-    date: string;
-    link: string;
-  };
-}
+import { AppDispatch, RootState } from "../Store/Store";
+import { fetchAllJopByid } from "../Store/Reducer/GetJopById";
+import { useEffect, useState } from "react";
+import { fetchEditJop } from "../Store/Reducer/UpdateJop";
 
 const EditJopForm = ({ setEditForm }: { setEditForm: () => void }) => {
-  const [stateData, setStateData] = useState<jopData>();
+  const stateData = useSelector((state: RootState) => state.jopByid);
+  const [formData, setFormData] = useState({
+    company: stateData?.data?.Jops?.company || "",
+    role: stateData?.data?.Jops?.role || "",
+    location: stateData?.data?.Jops?.location || "",
+    status: stateData?.data?.Jops?.status || "",
+    link: stateData?.data?.Jops?.link || "",
+  });
+
+  const dispatch = useDispatch<AppDispatch>();
   const { id } = useParams();
 
   useEffect(() => {
-    fetch(`http://localhost:3000/jop/${id}`)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setStateData(data);
-      });
-  }, [id]);
+    dispatch(fetchAllJopByid(id as string));
+  }, []);
+
+  const handleChange = (el: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [el.target.name]: el.target.value });
+  };
+
+  const handleSubmit = async (el: any) => {
+    try {
+      el.preventDefault();
+      await dispatch(
+        fetchEditJop({
+          id: id!,
+          updatedData: formData,
+        })
+      );
+      await dispatch(fetchAllJopByid(id!));
+      setEditForm();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className={`bg-white w-[50pc] p-3  rounded-xl`}>
       <h1 className="text-lg text-black font-bold">Edit Jop</h1>
 
-      <form className="mt-3 flex flex-col gap-3">
+      <form className="mt-3 flex flex-col gap-3" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-1">
           <label htmlFor="company">Company</label>
           <input
             type="text"
             id="company"
             className="p-1 border-[1px] rounded-md border-gray-400"
-            placeholder="Company"
-            value={stateData?.Jops?.company || ""}
-            onChange={() => {}}
+            name="company"
+            value={formData.company || ""}
+            onChange={handleChange}
           />
           <span className="text-red-600"></span>
         </div>
@@ -51,10 +65,10 @@ const EditJopForm = ({ setEditForm }: { setEditForm: () => void }) => {
           <input
             type="text"
             id="role"
+            name="role"
             className="p-1 border-[1px] rounded-md border-gray-400"
-            placeholder="Role"
-            value={stateData?.Jops?.role || ""}
-            onChange={() => {}}
+            value={formData.role || ""}
+            onChange={handleChange}
           />
           <span className="text-red-600"></span>
         </div>
@@ -63,21 +77,28 @@ const EditJopForm = ({ setEditForm }: { setEditForm: () => void }) => {
           <label htmlFor="location">Location</label>
           <input
             type="text"
-            id="role"
+            id="location"
+            name="location"
             className="p-1 border-[1px] rounded-md border-gray-400"
-            placeholder="Location"
-            value={stateData?.Jops?.location || ""}
-            onChange={() => {}}
+            value={formData.location || ""}
+            onChange={handleChange}
           />
           <span className="text-red-600"></span>
         </div>
 
         <div className="flex flex-col gap-1">
           <label htmlFor="status">Status</label>
-          <select className="p-1 border-[1px] rounded-md border-gray-400">
+          <select
+            className="p-1 border-[1px] rounded-md border-gray-400"
+            name="status"
+            value={formData.status}
+            onChange={(e) =>
+              setFormData({ ...formData, status: e.target.value })
+            }
+          >
             <option value="Most Popular">Most Popular</option>
             <option value="Applied">Applied</option>
-            <option value="Interview">Interview </option>
+            <option value="Interview">Interview</option>
             <option value="Offer">Offer</option>
             <option value="Rejected">Rejected</option>
           </select>
@@ -90,9 +111,9 @@ const EditJopForm = ({ setEditForm }: { setEditForm: () => void }) => {
             type="text"
             id="link"
             className="p-1 border-[1px] rounded-md border-gray-400"
-            placeholder="Link"
-            value={stateData?.Jops?.link || ""}
-            onChange={() => {}}
+            name="link"
+            value={formData.link || ""}
+            onChange={handleChange}
           />
           <span className="text-red-600"></span>
         </div>
