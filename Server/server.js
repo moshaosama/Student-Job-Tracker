@@ -7,6 +7,7 @@ import { getJopByIdRouter, getJopRouter } from "./Router/Jop/getJop.js";
 import EditJopRouter from "./Router/Jop/EditJop.js";
 import DeletedRouter from "./Router/Jop/DeletedJop.js";
 import FilterJopRouter from "./Router/Jop/FilterJopByFilter.js";
+import JopModel from "./Models/JopModel.js";
 
 dotenv.config({ path: ".env" });
 
@@ -18,8 +19,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
-app.get("/", (req, res) => {
-  res.send("API is working!");
+app.get("/", async (req, res) => {
+  const Jops = await JopModel.find().limit(2);
+  res.status(200).json({
+    Jops,
+  });
 });
 app.use("/createjop", createJopRouter);
 app.use("/getjops", getJopRouter);
