@@ -6,6 +6,7 @@ import createJopRouter from "./Router/Jop/createJop.js";
 import { getJopByIdRouter, getJopRouter } from "./Router/Jop/getJop.js";
 import EditJopRouter from "./Router/Jop/EditJop.js";
 import DeletedRouter from "./Router/Jop/DeletedJop.js";
+import FilterJopRouter from "./Router/Jop/FilterJopByFilter.js";
 const app = express();
 const Port = process.env.PORT || 3000;
 
@@ -20,6 +21,7 @@ app.use("/getjops", getJopRouter);
 app.use("/jop", getJopByIdRouter);
 app.use("/updatejop", EditJopRouter);
 app.use("/deletejop", DeletedRouter);
+app.use("/filterjop", FilterJopRouter);
 ////////////
 
 app.listen(Port, async () => {

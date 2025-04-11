@@ -2,20 +2,29 @@ import React, { ReactNode, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../Store/Store";
-import { fetchAllJops } from "../../../Store/Reducer/GetAllJops";
+
+import { fetchFilterJops } from "../../../Store/Reducer/FilterJop";
 
 interface GetJopsLoaderProps {
   children: ReactNode;
   resourceName: string;
+  status: string;
 }
 
-const GetJopsLoader = ({ children, resourceName }: GetJopsLoaderProps) => {
-  const resData = useSelector((state: RootState) => state.Jops);
+const GetJopsLoader = ({
+  children,
+  resourceName,
+  status,
+}: GetJopsLoaderProps) => {
+  const resData = useSelector((state: RootState) => state.filteredJop);
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    dispatch(fetchAllJops());
-  }, []);
+    if (!status) {
+      return;
+    }
+    dispatch(fetchFilterJops(status));
+  }, [status, dispatch]);
 
   return React.Children.map(children, (child) => {
     if (React.isValidElement(child)) {

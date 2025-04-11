@@ -25,7 +25,7 @@ const LatestJop = () => {
           </button>
         </div>
 
-        <GetJopsLoader resourceName="jops">
+        <GetJopsLoader resourceName="jops" status="All">
           <LoadedJopInfo loading={loading} />
         </GetJopsLoader>
 
