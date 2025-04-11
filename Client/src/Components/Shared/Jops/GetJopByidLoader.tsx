@@ -1,5 +1,7 @@
-import React, { ReactNode } from "react";
-import useFetch from "../../../Hooks/useFetch";
+import React, { ReactNode, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../../Store/Store";
+import { fetchAllJopByid } from "../../../Store/Reducer/GetJopById";
 
 interface GetJopByidLoaderProps {
   children: ReactNode;
@@ -12,7 +14,12 @@ const GetJopByidLoader = ({
   id,
   resourceName,
 }: GetJopByidLoaderProps) => {
-  const { resData } = useFetch(`http://localhost:3000/jop/${id}`);
+  const resData = useSelector((state: RootState) => state.jopByid);
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(fetchAllJopByid(id));
+  }, []);
 
   return React.Children.map(children, (child) => {
     if (React.isValidElement(child)) {
