@@ -68,9 +68,6 @@ const Jopinfo = ({ jops }: jopDataArray | jopData) => {
                         <p className="text-blue-400 border-[1px] border-solid px-2 font-bold rounded-full w-fit">
                           {jop?.status}
                         </p>
-                        <p className="text-orange-400 border-[1px] border-solid px-2 font-bold rounded-full w-fit">
-                          Full Time
-                        </p>
                         <p className="text-purple-400 border-[1px] border-solid px-2 font-bold rounded-full w-fit">
                           {jop?.date}
                         </p>
@@ -91,9 +88,7 @@ const Jopinfo = ({ jops }: jopDataArray | jopData) => {
             <p className="text-blue-400 border-[1px] border-solid px-2 font-bold rounded-full w-fit">
               {jops?.data?.Jops?.status}
             </p>
-            <p className="text-orange-400 border-[1px] border-solid px-2 font-bold rounded-full w-fit">
-              Full Time
-            </p>
+
             <p className="text-purple-400 border-[1px] border-solid px-2 font-bold rounded-full w-fit">
               {jops?.data?.Jops?.date}
             </p>
