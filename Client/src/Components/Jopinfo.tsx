@@ -1,6 +1,10 @@
-import { Link } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 import useAddForm from "../Hooks/useAddForm";
 import EditJopForm from "./EditJopForm";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../Store/Store";
+import { fetchDeleteJop } from "../Store/Reducer/DeleteJop";
+import { fetchAllJops } from "../Store/Reducer/GetAllJops";
 
 interface jopDataArray {
   jops?: {
@@ -38,8 +42,22 @@ interface jopData {
 
 const Jopinfo = ({ jops }: jopDataArray | jopData) => {
   const { pathname } = window.location;
-
   const { handleClickEditState, EditFromState } = useAddForm();
+  const dispatch = useDispatch<AppDispatch>();
+  const Naviagte = useNavigate();
+
+  const handleDeleteClick = async () => {
+    try {
+      if (!Array.isArray(jops?.data?.Jops)) {
+        const id = jops?.data.Jops?._id;
+        await dispatch(fetchDeleteJop(id!));
+        await dispatch(fetchAllJops());
+      }
+      Naviagte("/");
+    } catch (err) {
+      console.error(err);
+    }
+  };
   return (
     <>
       {Array.isArray(jops?.data?.Jops) ? (
@@ -103,7 +121,7 @@ const Jopinfo = ({ jops }: jopDataArray | jopData) => {
                 </button>
                 <button
                   className="bg-red-400 w-20 py-1 rounded-lg font-semibold cursor-pointer hover:bg-red-200 transition-all duration-300"
-                  onClick={handleClickEditState}
+                  onClick={handleDeleteClick}
                 >
                   Delete
                 </button>
