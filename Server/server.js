@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import { connectDB } from "./ConnectDB/DB.js";
 import createJopRouter from "./Router/Jop/createJop.js";
 import { getJopByIdRouter, getJopRouter } from "./Router/Jop/getJop.js";
+import EditJopRouter from "./Router/Jop/EditJop.js";
 const app = express();
 const Port = process.env.PORT || 3000;
 
@@ -16,7 +17,7 @@ dotenv.config({ path: ".env" });
 app.use("/createjop", createJopRouter);
 app.use("/getjops", getJopRouter);
 app.use("/jop", getJopByIdRouter);
-
+app.use("/updatejop", EditJopRouter);
 ////////////
 
 app.listen(Port, async () => {
