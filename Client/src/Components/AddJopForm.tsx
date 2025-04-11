@@ -1,4 +1,6 @@
 import { useForm } from "react-hook-form";
+import useNotify from "../Hooks/useNotify";
+import { ToastContainer } from "react-toastify";
 
 const AddJopForm = ({ setAddForm }: { setAddForm: () => void }) => {
   const {
@@ -10,6 +12,7 @@ const AddJopForm = ({ setAddForm }: { setAddForm: () => void }) => {
   const formattedDate = `${date.getDate()}/${
     date.getMonth() + 1
   }/${date.getFullYear()}`;
+  const { notifySuccess, notifyError } = useNotify();
 
   const handleSubmitData = (data: any) => {
     fetch("http://localhost:3000/createjop", {
@@ -18,9 +21,16 @@ const AddJopForm = ({ setAddForm }: { setAddForm: () => void }) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ ...data, date: formattedDate }),
-    }).then((res) => {
-      return res.json();
-    });
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then(() => {
+        notifySuccess("Addedd Successfully!❤️");
+      })
+      .catch((err) => {
+        notifyError(err as string);
+      });
   };
 
   return (
@@ -38,9 +48,11 @@ const AddJopForm = ({ setAddForm }: { setAddForm: () => void }) => {
             id="company"
             className="p-1 border-[1px] rounded-md border-gray-400"
             placeholder="Company"
-            {...register("company", { required: true })}
+            {...register("company", { required: "Company is required" })}
           />
-          <span>{errors?.company?.message as string}</span>
+          <span className="text-red-600">
+            {errors?.company?.message as string}
+          </span>
         </div>
 
         <div className="flex flex-col gap-1">
@@ -50,9 +62,11 @@ const AddJopForm = ({ setAddForm }: { setAddForm: () => void }) => {
             id="role"
             className="p-1 border-[1px] rounded-md border-gray-400"
             placeholder="Role"
-            {...register("role", { required: true })}
+            {...register("role", { required: "Role is required" })}
           />
-          <span>{errors?.role?.message as string}</span>
+          <span className="text-red-600">
+            {errors?.role?.message as string}
+          </span>
         </div>
 
         <div className="flex flex-col gap-1">
@@ -62,16 +76,18 @@ const AddJopForm = ({ setAddForm }: { setAddForm: () => void }) => {
             id="role"
             className="p-1 border-[1px] rounded-md border-gray-400"
             placeholder="Location"
-            {...register("location", { required: true })}
+            {...register("location", { required: "Location is required" })}
           />
-          <span>{errors?.role?.message as string}</span>
+          <span className="text-red-600">
+            {errors?.role?.message as string}
+          </span>
         </div>
 
         <div className="flex flex-col gap-1">
           <label htmlFor="status">Status</label>
           <select
             className="p-1 border-[1px] rounded-md border-gray-400"
-            {...register("status", { required: true })}
+            {...register("status", { required: "Status is required" })}
           >
             <option value="Most Popular">Most Popular</option>
             <option value="Applied">Applied</option>
@@ -79,7 +95,9 @@ const AddJopForm = ({ setAddForm }: { setAddForm: () => void }) => {
             <option value="Offer">Offer</option>
             <option value="Rejected">Rejected</option>
           </select>
-          <span>{errors?.status?.message as string}</span>
+          <span className="text-red-600">
+            {errors?.status?.message as string}
+          </span>
         </div>
 
         <div className="flex flex-col gap-1">
@@ -89,9 +107,11 @@ const AddJopForm = ({ setAddForm }: { setAddForm: () => void }) => {
             id="link"
             className="p-1 border-[1px] rounded-md border-gray-400"
             placeholder="Link"
-            {...register("link", { required: true })}
+            {...register("link", { required: "Link is required" })}
           />
-          <span>{errors?.link?.message as string}</span>
+          <span className="text-red-600">
+            {errors?.link?.message as string}
+          </span>
         </div>
 
         <div className="flex items-center justify-between">
@@ -109,6 +129,7 @@ const AddJopForm = ({ setAddForm }: { setAddForm: () => void }) => {
           </button>
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 };
