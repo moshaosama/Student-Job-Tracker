@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../Store/Store";
 import { fetchCreateNewJop } from "../Store/Reducer/CreateNewJop";
 import { fetchAllJops } from "../Store/Reducer/GetAllJops";
+import useDate from "../Hooks/useDate";
 
 const AddJopForm = ({ setAddForm }: { setAddForm: () => void }) => {
   const {
@@ -11,11 +12,7 @@ const AddJopForm = ({ setAddForm }: { setAddForm: () => void }) => {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm();
-
-  const date = new Date();
-  const formattedDate = `${date.getDate()}/${
-    date.getMonth() + 1
-  }/${date.getFullYear()}`;
+  const { formattedDate } = useDate();
 
   const dispatch = useDispatch<AppDispatch>();
 
