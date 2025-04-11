@@ -6,7 +6,10 @@ export const fetchCreateNewJop = createAsyncThunk(
   "createNewJop/fetchCreateNewJop",
   async (data, thunkAPI) => {
     try {
-      const response = await axios.post("http://localhost:3000/createjop", data);
+      const response = await axios.post(
+        "http://localhost:3000/createjop",
+        data
+      );
       return response.data;
     } catch (error: any) {
       return thunkAPI.rejectWithValue(error.message || "Failed to fetch jobs");
