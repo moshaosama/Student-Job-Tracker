@@ -5,6 +5,7 @@ import { AppDispatch } from "../Store/Store";
 import { fetchCreateNewJop } from "../Store/Reducer/CreateNewJop";
 import { fetchAllJops } from "../Store/Reducer/GetAllJops";
 import useDate from "../Hooks/useDate";
+import { fetchFilterJops } from "../Store/Reducer/FilterJop";
 
 const AddJopForm = ({ setAddForm }: { setAddForm: () => void }) => {
   const {
@@ -19,7 +20,7 @@ const AddJopForm = ({ setAddForm }: { setAddForm: () => void }) => {
   const handleSubmitData = async (data: any) => {
     try {
       await dispatch(fetchCreateNewJop({ ...data, date: formattedDate }));
-      await dispatch(fetchAllJops());
+      await dispatch(fetchFilterJops("All"));
       setAddForm();
     } catch (error) {
       console.error(error);
