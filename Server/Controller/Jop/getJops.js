@@ -42,9 +42,9 @@ export const getJopById = async (req, res) => {
       });
     }
 
-    const Jop = await JopModel.findById(id);
+    const Jops = await JopModel.findById(id);
 
-    if (!Jop) {
+    if (!Jops) {
       return res.status(404).json({
         statusbar: "error",
         message: "Job not found",
@@ -53,7 +53,7 @@ export const getJopById = async (req, res) => {
 
     return res.status(200).json({
       statusbar: "success",
-      Jop,
+      Jops,
     });
   } catch (error) {
     return res.status(500).json({
