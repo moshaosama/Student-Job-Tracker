@@ -35,4 +35,10 @@ app.use("/filterjop", FilterJopRouter);
 // Database Connection
 connectDB();
 
+app.listen(process.env.PORT, () => {
+  console.log("====================================");
+  console.log("listhening on Port 3000");
+  console.log("====================================");
+});
+
 export default app;
